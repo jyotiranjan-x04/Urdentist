@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — DESIGN SYSTEM
+   Source: TECH_STACK_BLUEPRINT §2.3 + Implementation Plan §3.1
+   Note: Font variables are injected via next/font/google on <html>
+   ============================================================ */
+
+:root {
+  /* Colors (mirrored from Tailwind for non-Tailwind contexts) */
+  --color-pearl: #fefbf5;
+  --color-sand: #f0e9dc;
+  --color-cream: #f7f0e6;
+  --color-gold: #c9a96e;
+  --color-espresso: #2c2416;
+  --color-muted: #8a7f72;
+  --color-trust: #3d7a6e;
+
+  /* Z-index system */
+  --z-background: 0;
+  --z-content: 1;
+  --z-image: 2;
+  --z-overlay: 10;
+  --z-sticky: 100;
+  --z-float: 200;
+  --z-modal: 300;
+
+  /* Section spacing (8-point grid) */
+  --section-py: 80px;
+  --section-py-sm: 48px;
+}
+
+/* ============================================================
+   BASE LAYER — GLOBAL RESETS
+   ============================================================ */
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll, not CSS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-pearl text-espresso font-body;
+    overflow-x: hidden;
+  }
+
+  /* Headings use display font (Cassandra) by default */
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  /* Focus visible states for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-gold/20 text-espresso;
+  }
+}
+
+/* ============================================================
+   COMPONENT LAYER — REUSABLE PATTERNS
+   ============================================================ */
+
+@layer components {
+  /* Container — 1280px max-width (C-10) */
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 md:px-8;
+  }
+
+  /* Section vertical padding */
+  .section-padding {
+    padding-top: var(--section-py-sm);
+    padding-bottom: var(--section-py-sm);
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: var(--section-py);
+      padding-bottom: var(--section-py);
+    }
+  }
+
+  /* Overline label */
+  .overline {
+    @apply font-body text-xs font-medium uppercase tracking-[0.2em] text-gold;
+  }
+}
+
+/* ============================================================
+   UTILITY LAYER
+   ============================================================ */
+
+@layer utilities {
+  /* Hide scrollbar but keep scrollable */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Marquee animation — services ticker (S-04) */
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Slow spin — trust badge (Hero) */
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  @keyframes spin-slow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Reduced motion — disable all transitions/animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

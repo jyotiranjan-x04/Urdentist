@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "dental-checkup",
+    "title": "Dental Checkup",
+    "shortDescription": "Routine monitoring and cleaning",
+    "description": "Comprehensive dental examination and professional cleaning at our Lalghati, Bhopal clinic. Regular checkups help detect dental issues early and maintain optimal oral health.",
+    "benefits": [
+      "Early cavity detection",
+      "Professional teeth cleaning",
+      "Oral cancer screening",
+      "Gum health assessment"
+    ]
+  },
+  {
+    "slug": "braces",
+    "title": "Braces",
+    "shortDescription": "Teeth alignment and correction",
+    "description": "Expert orthodontic treatment for perfectly aligned teeth. Dr. Arjun Singh Baghel provides personalized braces solutions at Ur Dentist, Lalghati, Bhopal.",
+    "benefits": [
+      "Metal and ceramic options",
+      "Personalized treatment plan",
+      "Regular adjustment visits",
+      "Permanent retainer included"
+    ]
+  },
+  {
+    "slug": "dental-implants",
+    "title": "Dental Implants",
+    "shortDescription": "Permanent replacement for missing teeth",
+    "description": "Permanent, natural-looking tooth replacement with titanium implants. MDS-specialist care at Ur Dentist, Lalghati, Bhopal for lasting results.",
+    "benefits": [
+      "Permanent solution",
+      "Natural look and feel",
+      "Preserves jawbone health",
+      "No impact on adjacent teeth"
+    ]
+  },
+  {
+    "slug": "missing-teeth",
+    "title": "Missing Teeth",
+    "shortDescription": "Restoration: implants, crowns, dentures",
+    "description": "Comprehensive solutions for missing teeth including dental bridges, crowns, and partial/full dentures. Restore your smile at Ur Dentist, Bhopal.",
+    "benefits": [
+      "Multiple restoration options",
+      "Custom-fitted solutions",
+      "Improved chewing function",
+      "Enhanced smile aesthetics"
+    ]
+  },
+  {
+    "slug": "root-canal-treatment",
+    "title": "Root Canal Treatment",
+    "shortDescription": "Treatment for infected teeth",
+    "description": "Pain-free root canal therapy to save infected teeth. Advanced techniques by Dr. Arjun Singh Baghel at our Lalghati, Bhopal clinic.",
+    "benefits": [
+      "Pain-free procedure",
+      "Saves natural tooth",
+      "Prevents infection spread",
+      "Same-day crown option"
+    ]
+  },
+  {
+    "slug": "invisible-aligners",
+    "title": "Invisible Aligners",
+    "shortDescription": "Clear removable aligners",
+    "description": "Discreet teeth straightening with clear, removable aligners. No metal brackets — just a confident smile journey at Ur Dentist, Lalghati, Bhopal.",
+    "benefits": [
+      "Nearly invisible appearance",
+      "Removable for eating",
+      "Comfortable to wear",
+      "Predictable digital results"
+    ]
+  }
+]
