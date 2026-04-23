@@ -38,7 +38,7 @@ export default function TrustAboutSection() {
             viewport={{ once: false, margin: "-80px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="relative mx-auto max-w-md lg:max-w-none">
+            <div className="relative mx-auto max-w-md lg:max-w-none overflow-hidden p-4">
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-cream border-4 border-sand mx-auto lg:mx-0 relative">
                 <Image
                   src="/images/interior_main.png"

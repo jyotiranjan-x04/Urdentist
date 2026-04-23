@@ -109,7 +109,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${playfair.variable} ${lora.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${playfair.variable} ${lora.variable} overflow-x-hidden`}>
       <body className="font-body bg-pearl text-espresso antialiased">
         {/* GA4 — afterInteractive, does NOT block LCP */}
         <GoogleAnalytics />
@@ -121,7 +121,7 @@ export default function RootLayout({
         <ErrorBoundary>
           {/* RootProviders — client wrapper: Lenis + GSAP + AnimatePresence */}
           <RootProviders>
-            <main className="min-h-screen">{children}</main>
+            <main className="min-h-screen overflow-x-hidden">{children}</main>
           </RootProviders>
         </ErrorBoundary>
 
