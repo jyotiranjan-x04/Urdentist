@@ -21,7 +21,6 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerGSAPPlugins } from "@/lib/animations";
-import { useScrollReset } from "@/hooks/useScrollReset";
 
 export default function RootProviders({
   children,
@@ -31,8 +30,7 @@ export default function RootProviders({
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
 
-  // Scroll reset on route change
-  useScrollReset();
+
 
   useEffect(() => {
     // 1. Register GSAP plugins
@@ -68,12 +66,26 @@ export default function RootProviders({
     };
   }, []);
 
-  // Refresh ScrollTrigger on route change
+  // 2. Handle scroll reset and ScrollTrigger refresh on route change
   useEffect(() => {
-    // Small delay to let new page content render
+    // Reset scroll to top immediately
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    // Secondary reset after a small delay to ensure new page content is rendered
+    // and to fight any browser-level scroll restoration
     const timeout = setTimeout(() => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
       ScrollTrigger.refresh();
     }, 100);
+
     return () => clearTimeout(timeout);
   }, [pathname]);
 
