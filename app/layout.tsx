@@ -82,11 +82,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  other: {
-    "geo.region": "IN-MP",
-    "geo.placename": "Bhopal",
-    "geo.position": "23.2599;77.4126",
-    ICBM: "23.2599, 77.4126",
+  icons: {
+    icon: "/images/logo.webp",
+    shortcut: "/images/logo.webp",
+    apple: "/images/logo.webp",
   },
   manifest: "/manifest.json",
 };
