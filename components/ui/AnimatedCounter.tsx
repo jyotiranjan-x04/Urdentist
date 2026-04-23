@@ -38,11 +38,10 @@ export default function AnimatedCounter({
   className,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   const animate = useCallback(() => {
-    if (hasAnimated || displayValue) return;
+    if (displayValue) return;
 
     const startTime = performance.now();
     const startValue = 0;
@@ -61,12 +60,11 @@ export default function AnimatedCounter({
         requestAnimationFrame(updateCount);
       } else {
         setCount(value);
-        setHasAnimated(true);
       }
     }
 
     requestAnimationFrame(updateCount);
-  }, [value, duration, hasAnimated, displayValue]);
+  }, [value, duration, displayValue]);
 
   useEffect(() => {
     const el = elementRef.current;
@@ -74,8 +72,11 @@ export default function AnimatedCounter({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
+        if (entry.isIntersecting) {
           animate();
+        } else {
+          // Reset count so it can re-animate when scrolled back
+          setCount(0);
         }
       },
       { threshold: 0.3 }
@@ -83,7 +84,7 @@ export default function AnimatedCounter({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [animate, hasAnimated]);
+  }, [animate]);
 
   // Format number with commas for large values
   const formatNumber = (n: number): string => {
@@ -95,12 +96,12 @@ export default function AnimatedCounter({
 
   return (
     <div ref={elementRef} className={className}>
-      <div className="font-body text-3xl md:text-4xl font-bold text-gold tabular-nums">
+      <div className="font-body text-3xl md:text-4xl font-bold tabular-nums">
         {prefix}
         {displayValue || formatNumber(count)}
         {!displayValue && suffix}
       </div>
-      <p className="font-body text-sm text-muted mt-1">{label}</p>
+      <p className="font-body text-sm mt-1 opacity-80">{label}</p>
     </div>
   );
 }

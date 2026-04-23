@@ -17,8 +17,8 @@
 import { motion } from "framer-motion";
 import SectionHeader from "@/components/ui/SectionHeader";
 import AppointmentForm from "@/components/forms/AppointmentForm";
-import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { CLINIC, WA_LINK, WA_MESSAGES } from "@/lib/constants";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const steps = [
   {
@@ -54,6 +54,8 @@ export default function ProcessBookingSection({
   prefillName,
   prefillPhone,
 }: ProcessBookingSectionProps) {
+  const { enableStagger } = useAnimationConfig();
+
   return (
     <>
       {/* ════════════ PROCESS STRIP ════════════ */}
@@ -71,9 +73,9 @@ export default function ProcessBookingSection({
               <motion.div
                 key={i}
                 className="relative text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                initial={enableStagger ? { opacity: 0, y: 30, x: i % 2 === 0 ? -20 : 20 } : false}
+                whileInView={enableStagger ? { opacity: 1, y: 0, x: 0 } : undefined}
+                viewport={{ once: false, margin: "-50px", amount: 0.2 }}
                 transition={{ duration: 0.4, delay: i * 0.12 }}
               >
                 {/* Connector line (hidden on mobile and last item) */}
@@ -121,12 +123,10 @@ export default function ProcessBookingSection({
             {/* ═══ FORM (left 2/3) ═══ */}
             <div className="lg:col-span-2">
               <div className="rounded-2xl border border-sand bg-cream/30 p-6 md:p-8">
-                <ErrorBoundary>
-                  <AppointmentForm
-                    prefillName={prefillName}
-                    prefillPhone={prefillPhone}
-                  />
-                </ErrorBoundary>
+                <AppointmentForm
+                  prefillName={prefillName}
+                  prefillPhone={prefillPhone}
+                />
               </div>
             </div>
 

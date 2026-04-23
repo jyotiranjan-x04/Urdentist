@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ServiceCard from "@/components/ui/ServiceCard";
 import servicesData from "@/content/services.json";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const marqueeItems = [
   "General Dentistry",
@@ -29,6 +30,8 @@ const marqueeItems = [
 ];
 
 export default function ServicesSection() {
+  const { enableStagger } = useAnimationConfig();
+
   return (
     <>
       {/* ════════════ MARQUEE DIVIDER ════════════ */}
@@ -71,15 +74,16 @@ export default function ServicesSection() {
             {servicesData.map((service, i) => (
               <motion.div
                 key={service.slug}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                initial={enableStagger ? { opacity: 0, y: 40 } : false}
+                whileInView={enableStagger ? { opacity: 1, y: 0 } : undefined}
+                viewport={{ once: false, margin: "-50px", amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
               >
                 <ServiceCard
                   title={service.title}
                   description={service.description}
                   slug={service.slug}
+                  image={(service as any).image}
                 />
               </motion.div>
             ))}

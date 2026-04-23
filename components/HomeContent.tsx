@@ -60,7 +60,7 @@ export default function HomeContent() {
       <FAQSection />
 
       {/* Spacer for mobile bottom bar */}
-      <div className="h-16 md:hidden" />
+      <div className="h-24 md:hidden" />
     </>
   );
 }

@@ -15,6 +15,7 @@
 
 import type { Metadata } from "next";
 import HomeContent from "@/components/HomeContent";
+import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 
 export const metadata: Metadata = {
   // Title and description are inherited from layout.tsx defaults,
@@ -26,8 +27,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
-      <HomeContent />
-    </main>
+    <>
+      <LocalBusinessSchema />
+      <main>
+        <HomeContent />
+      </main>
+    </>
   );
 }

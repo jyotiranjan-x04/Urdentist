@@ -14,6 +14,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 const bannerStats = [
   { value: 10, suffix: "+", label: "Skilled Doctors", isPlaceholder: true },
@@ -23,6 +25,8 @@ const bannerStats = [
 ];
 
 export default function VideoStatsSection() {
+  const { enableScrollAnimations } = useAnimationConfig();
+
   return (
     <>
       {/* ════════════ VIDEO BANNER ════════════ */}
@@ -49,9 +53,9 @@ export default function VideoStatsSection() {
         {/* Content overlay */}
         <motion.div
           className="relative z-10 text-center px-5"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={enableScrollAnimations ? { opacity: 0, y: 30 } : false}
+          whileInView={enableScrollAnimations ? { opacity: 1, y: 0 } : undefined}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <p className="font-body text-xs font-medium uppercase tracking-[0.2em] text-gold mb-4">
@@ -82,17 +86,13 @@ export default function VideoStatsSection() {
         <div className="container-content">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-pearl">
             {bannerStats.map((stat, i) => (
-              <div key={i}>
-                <div className="font-body text-3xl md:text-4xl font-bold text-pearl tabular-nums">
-                  {stat.value >= 1000
-                    ? stat.value.toLocaleString("en-US")
-                    : stat.value}
-                  {stat.suffix}
+                <div key={i} className="text-pearl">
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    label={stat.label}
+                  />
                 </div>
-                <p className="font-body text-sm text-pearl/70 mt-1">
-                  {stat.label}
-                </p>
-              </div>
             ))}
           </div>
         </div>

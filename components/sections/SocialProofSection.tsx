@@ -16,10 +16,13 @@ import { motion } from "framer-motion";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import { CLINIC } from "@/lib/constants";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const instagramTiles = Array.from({ length: 8 }, (_, i) => i);
 
 export default function SocialProofSection() {
+  const { enableScrollAnimations, enableStagger } = useAnimationConfig();
+
   return (
     <section id="reviews" className="section-padding bg-cream">
       <div className="container-content">
@@ -35,9 +38,9 @@ export default function SocialProofSection() {
         {/* Featured testimonial */}
         <motion.div
           className="max-w-2xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={enableScrollAnimations ? { opacity: 0, x: 40 } : false}
+          whileInView={enableScrollAnimations ? { opacity: 1, x: 0 } : undefined}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <TestimonialCard
@@ -96,9 +99,9 @@ export default function SocialProofSection() {
               <motion.div
                 key={i}
                 className="aspect-square rounded-xl bg-gradient-to-br from-sand/50 to-cream border border-sand/50 flex items-center justify-center overflow-hidden group cursor-pointer hover:border-gold/30 transition-colors"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                initial={enableStagger ? { opacity: 0, scale: 0.85, y: 15 } : false}
+                whileInView={enableStagger ? { opacity: 1, scale: 1, y: 0 } : undefined}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
               >
                 <svg

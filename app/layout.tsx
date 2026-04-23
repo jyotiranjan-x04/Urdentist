@@ -7,7 +7,7 @@ import Footer from "@/components/layout/Footer";
 import MobileBottomBar from "@/components/layout/MobileBottomBar";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
-import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 /* ============================================================
    FONT SYSTEM (C-01 — Google Fonts Only)
@@ -117,10 +117,13 @@ export default function RootLayout({
         {/* Header — sticky nav, Server Component shell with client interactivity */}
         <Header />
 
-        {/* RootProviders — client wrapper: Lenis + GSAP + AnimatePresence */}
-        <RootProviders>
-          <main className="min-h-screen">{children}</main>
-        </RootProviders>
+        {/* Global ErrorBoundary (Added from Gap Analysis) */}
+        <ErrorBoundary>
+          {/* RootProviders — client wrapper: Lenis + GSAP + AnimatePresence */}
+          <RootProviders>
+            <main className="min-h-screen">{children}</main>
+          </RootProviders>
+        </ErrorBoundary>
 
         {/* Footer — pure Server Component */}
         <Footer />
@@ -130,9 +133,6 @@ export default function RootLayout({
 
         {/* FloatingWhatsApp — desktop, hides at #appointment-form (C-09) */}
         <FloatingWhatsApp />
-
-        {/* JSON-LD LocalBusinessSchema — renders on every page (§7.2) */}
-        <LocalBusinessSchema />
       </body>
     </html>
   );

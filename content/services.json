@@ -9,7 +9,8 @@
       "Professional teeth cleaning",
       "Oral cancer screening",
       "Gum health assessment"
-    ]
+    ],
+    "image": "/images/dental_checkup.png"
   },
   {
     "slug": "braces",
@@ -21,7 +22,8 @@
       "Personalized treatment plan",
       "Regular adjustment visits",
       "Permanent retainer included"
-    ]
+    ],
+    "image": "/images/braces.png"
   },
   {
     "slug": "dental-implants",
@@ -33,7 +35,8 @@
       "Natural look and feel",
       "Preserves jawbone health",
       "No impact on adjacent teeth"
-    ]
+    ],
+    "image": "/images/dental_implants.png"
   },
   {
     "slug": "missing-teeth",
@@ -45,7 +48,8 @@
       "Custom-fitted solutions",
       "Improved chewing function",
       "Enhanced smile aesthetics"
-    ]
+    ],
+    "image": "/images/missing_teeth.png"
   },
   {
     "slug": "root-canal-treatment",
@@ -57,7 +61,8 @@
       "Saves natural tooth",
       "Prevents infection spread",
       "Same-day crown option"
-    ]
+    ],
+    "image": "/images/root_canal.png"
   },
   {
     "slug": "invisible-aligners",
@@ -69,6 +74,7 @@
       "Removable for eating",
       "Comfortable to wear",
       "Predictable digital results"
-    ]
+    ],
+    "image": "/images/invisible_aligners.png"
   }
 ]

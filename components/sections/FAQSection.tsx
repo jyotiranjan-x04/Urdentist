@@ -14,6 +14,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/ui/SectionHeader";
 import FAQItem from "@/components/ui/FAQItem";
 import { CLINIC, WA_LINK, WA_MESSAGES } from "@/lib/constants";
@@ -49,7 +50,13 @@ export default function FAQSection() {
           </div>
 
           {/* Sidebar — right 1/3 */}
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             {/* Need Help card */}
             <div className="rounded-2xl border border-sand bg-cream/50 p-6">
               <h3 className="font-display text-xl text-espresso mb-2">
@@ -129,7 +136,7 @@ export default function FAQSection() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -20,6 +20,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
+import HeroStrip from "@/components/forms/HeroStrip";
 import { CLINIC } from "@/lib/constants";
 
 interface HeroSectionProps {
@@ -67,7 +68,7 @@ export default function HeroSection({ onHeroStripSubmit }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center min-h-[calc(100vh-80px)]">
           {/* ═══ LEFT: Content (55% → 7/12) ═══ */}
           <motion.div
-            className="lg:col-span-7 pt-20 lg:pt-0"
+            className="lg:col-span-7 pt-28 lg:pt-0 pb-20 lg:pb-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.1 }}
@@ -112,9 +113,34 @@ export default function HeroSection({ onHeroStripSubmit }: HeroSectionProps) {
               </motion.span>
             </h1>
 
+            {/* Mobile-Only Visual Content */}
+            <motion.div
+              className="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:hidden mt-8 mb-6 rounded-3xl overflow-hidden bg-cream border border-sand shadow-card-lg"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+            >
+              <Image
+                src="/images/hero_portrait.png"
+                alt="Premium dental care provider"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 0vw"
+                priority
+              />
+              
+              {/* Trust Badge */}
+              <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-gold shadow-float flex items-center justify-center z-20">
+                <div className="text-center text-pearl flex flex-col justify-center gap-px animate-spin-slow">
+                  <p className="text-[15px] font-bold leading-none">10+</p>
+                  <p className="text-[6px] uppercase tracking-widest">Years</p>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Sub-headline */}
             <motion.p
-              className="font-quote text-lg md:text-xl text-muted mt-5 mb-8 max-w-lg leading-relaxed italic"
+              className="font-quote text-lg md:text-xl text-muted mt-2 lg:mt-5 mb-8 max-w-lg leading-relaxed italic"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.5 }}
@@ -152,47 +178,25 @@ export default function HeroSection({ onHeroStripSubmit }: HeroSectionProps) {
             </motion.div>
 
             {/* ═══ HERO STRIP — inline booking (C-03) ═══ */}
-            <motion.div
-              className="mt-10 p-4 md:p-5 rounded-2xl bg-pearl border border-sand shadow-card"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={heroName}
-                  onChange={(e) => setHeroName(e.target.value)}
-                  className="rounded-xl border border-sand bg-cream/50 px-4 py-2.5 font-body text-sm placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={heroPhone}
-                  onChange={(e) => setHeroPhone(e.target.value)}
-                  className="rounded-xl border border-sand bg-cream/50 px-4 py-2.5 font-body text-sm placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors"
-                />
-                <button
-                  onClick={handleHeroStripBook}
-                  className="bg-gold text-pearl rounded-xl px-6 py-2.5 font-body text-sm font-semibold hover:bg-gold/90 transition-colors cursor-pointer"
-                >
-                  Book Now →
-                </button>
-              </div>
-            </motion.div>
+            <HeroStrip
+              heroName={heroName}
+              setHeroName={setHeroName}
+              heroPhone={heroPhone}
+              setHeroPhone={setHeroPhone}
+              onBookNow={handleHeroStripBook}
+            />
           </motion.div>
 
           {/* ═══ RIGHT: Image (45% → 5/12) ═══ */}
           <motion.div
-            className="lg:col-span-5 relative hidden lg:flex justify-end"
+            className="lg:col-span-5 relative hidden lg:block mt-20 lg:mt-12"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="relative">
+            <div className="relative w-full h-full pb-10">
               {/* Main portrait — bleed (C-12) */}
-              <div className="w-[400px] xl:w-[480px] h-[550px] xl:h-[650px] rounded-3xl overflow-hidden bg-cream border border-sand relative">
+              <div className="w-[90%] ml-auto max-w-[420px] aspect-[3/4] md:h-[500px] xl:h-[580px] max-h-[60vh] rounded-3xl overflow-hidden bg-cream border border-sand relative">
                 <Image
                   src="/images/hero_portrait.png"
                   alt="Premium dental care provider"
@@ -205,7 +209,7 @@ export default function HeroSection({ onHeroStripSubmit }: HeroSectionProps) {
 
               {/* Floating secondary image */}
               <motion.div
-                className="absolute -bottom-6 -left-12 w-40 h-40 rounded-2xl overflow-hidden bg-cream border-4 border-pearl shadow-card-lg relative"
+                className="absolute bottom-0 left-0 w-[45%] max-w-[200px] aspect-square rounded-2xl overflow-hidden bg-cream border-4 border-pearl shadow-card-lg z-10"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.1 }}
@@ -221,12 +225,12 @@ export default function HeroSection({ onHeroStripSubmit }: HeroSectionProps) {
 
               {/* Trust badge — rotating */}
               <motion.div
-                className="absolute top-8 -left-8 w-24 h-24 rounded-full bg-gold shadow-float flex items-center justify-center"
+                className="absolute top-8 left-4 w-24 h-24 rounded-full bg-gold shadow-float flex items-center justify-center z-20"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 1.4, type: "spring" }}
               >
-                <div className="text-center text-pearl animate-spin-slow">
+                <div className="text-center text-pearl flex flex-col justify-center gap-0.5 animate-spin-slow">
                   <p className="text-xl font-bold leading-none">10+</p>
                   <p className="text-[8px] uppercase tracking-widest">
                     Years Exp

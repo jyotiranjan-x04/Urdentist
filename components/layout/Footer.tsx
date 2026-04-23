@@ -38,7 +38,7 @@ export default function Footer() {
                   src="/images/logo.webp"
                   alt={CLINIC.name}
                   fill
-                  className="object-contain object-left brightness-0 invert"
+                  className="object-contain object-left"
                 />
               </div>
             </Link>
@@ -172,7 +172,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar — Copyright */}
-      <div className="border-t border-pearl/10">
+      <div className="border-t border-pearl/10 pb-20 md:pb-0">
         <div className="container-content py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="font-body text-xs text-pearl/40">
             © {CURRENT_YEAR} {CLINIC.name}. All rights reserved.

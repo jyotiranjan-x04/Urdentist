@@ -15,6 +15,7 @@ import Image from "next/image";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import Button from "@/components/ui/Button";
 import { CLINIC, STATS } from "@/lib/constants";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const checkmarks = [
   "Advanced sterilization and hygiene protocols",
@@ -23,6 +24,8 @@ const checkmarks = [
 ];
 
 export default function TrustAboutSection() {
+  const config = useAnimationConfig();
+
   return (
     <section id="about" className="section-padding bg-pearl">
       <div className="container-content">
@@ -30,9 +33,9 @@ export default function TrustAboutSection() {
           {/* ═══ LEFT: Image Cluster (5/12) ═══ */}
           <motion.div
             className="lg:col-span-5 relative"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            initial={config.enableScrollAnimations ? { opacity: 0, x: -40 } : false}
+            whileInView={config.enableScrollAnimations ? { opacity: 1, x: 0 } : undefined}
+            viewport={{ once: false, margin: "-80px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
@@ -49,9 +52,9 @@ export default function TrustAboutSection() {
               {/* Secondary overlapping image */}
               <motion.div
                 className="absolute -bottom-4 -right-2 lg:right-0 w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-cream border-4 border-pearl shadow-card relative"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                initial={config.enableScrollAnimations ? { opacity: 0, scale: 0.8 } : false}
+                whileInView={config.enableScrollAnimations ? { opacity: 1, scale: 1 } : undefined}
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <Image
@@ -68,7 +71,7 @@ export default function TrustAboutSection() {
                 className="absolute -top-2 -right-2 lg:right-4 w-20 h-20 rounded-full bg-gold flex items-center justify-center shadow-float"
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: 0.5, type: "spring" }}
               >
                 <div className="text-center text-pearl">
@@ -84,9 +87,9 @@ export default function TrustAboutSection() {
           {/* ═══ RIGHT: Content (7/12) ═══ */}
           <motion.div
             className="lg:col-span-7"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            initial={config.enableScrollAnimations ? { opacity: 0, x: 40 } : false}
+            whileInView={config.enableScrollAnimations ? { opacity: 1, x: 0 } : undefined}
+            viewport={{ once: false, margin: "-80px", amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
             {/* Overline */}
@@ -117,7 +120,7 @@ export default function TrustAboutSection() {
                   className="flex items-start gap-3"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                   transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
                 >
                   <span className="shrink-0 w-5 h-5 rounded-full bg-gold/10 flex items-center justify-center mt-0.5">
@@ -151,19 +154,20 @@ export default function TrustAboutSection() {
 
         {/* ═══ STATS ROW ═══ */}
         <div className="mt-16 pt-10 border-t border-sand">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-gold">
             {STATS.map((stat, i) => (
-              <AnimatedCounter
-                key={i}
-                value={stat.value}
-                suffix={stat.suffix}
-                displayValue={
-                  "displayValue" in stat
-                    ? (stat as { displayValue?: string }).displayValue
-                    : undefined
-                }
-                label={stat.label}
-              />
+              <div key={i} className="[&>p]:text-muted [&>p]:opacity-100 flex flex-col items-center justify-center">
+                 <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  displayValue={
+                    "displayValue" in stat
+                      ? (stat as { displayValue?: string }).displayValue
+                      : undefined
+                  }
+                  label={stat.label}
+                 />
+              </div>
             ))}
           </div>
         </div>

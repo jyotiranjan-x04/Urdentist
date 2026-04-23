@@ -17,7 +17,7 @@ export default function LocalBusinessSchema() {
     url: CLINIC.website,
     telephone: `+91${CLINIC.phone}`,
     email: CLINIC.email,
-    image: `${CLINIC.website}/images/clinic-exterior.jpg`,
+    image: `${CLINIC.website}/images/clinic_exterior.png`,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",

@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const caseStories = [
   {
@@ -32,6 +33,8 @@ const caseStories = [
 ];
 
 export default function TransformationsSection() {
+  const { enableScrollAnimations, enableStagger } = useAnimationConfig();
+
   return (
     <section id="transformations" className="section-padding bg-pearl">
       <div className="container-content">
@@ -47,12 +50,12 @@ export default function TransformationsSection() {
         {/* Before/After Slider */}
         <motion.div
           className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={enableScrollAnimations ? { opacity: 0, x: -40 } : false}
+          whileInView={enableScrollAnimations ? { opacity: 1, x: 0 } : undefined}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="w-full max-w-5xl mx-auto shadow-card-lg rounded-2xl overflow-hidden">
+          <div className="w-full max-w-3xl lg:max-w-4xl mx-auto shadow-card-lg rounded-2xl overflow-hidden">
             <BeforeAfterSlider
               beforeImage="/images/before_smile.png"
               afterImage="/images/after_smile.png"
@@ -67,9 +70,9 @@ export default function TransformationsSection() {
             <motion.div
               key={i}
               className="group relative rounded-2xl border border-sand overflow-hidden bg-cream/50 hover:shadow-card transition-shadow"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={enableStagger ? { opacity: 0, x: i === 0 ? -40 : 40 } : false}
+              whileInView={enableStagger ? { opacity: 1, x: 0 } : undefined}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               <div className="aspect-[16/9] bg-cream flex items-center justify-center relative">

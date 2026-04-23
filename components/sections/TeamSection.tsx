@@ -15,6 +15,7 @@ import Image from "next/image";
 import TeamCard from "@/components/ui/TeamCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { CLINIC } from "@/lib/constants";
+import { useAnimationConfig } from "@/hooks/useAnimationConfig";
 
 const team = [
   {
@@ -26,6 +27,8 @@ const team = [
 ];
 
 export default function TeamSection() {
+  const { enableScrollAnimations } = useAnimationConfig();
+
   return (
     <section id="team" className="section-padding bg-pearl">
       <div className="container-content">
@@ -40,9 +43,9 @@ export default function TeamSection() {
         {/* Featured doctor */}
         <motion.div
           className="flex justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          initial={enableScrollAnimations ? { opacity: 0, y: 30, scale: 0.95 } : false}
+          whileInView={enableScrollAnimations ? { opacity: 1, y: 0, scale: 1 } : undefined}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <div className="text-center max-w-sm">
